@@ -276,7 +276,6 @@ async function getUser(table,query,value,token) {
 
     xhr.open("POST", "http://127.0.0.1:8000/getsingleuserdata");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
     xhr.send(data);
   });
 }
