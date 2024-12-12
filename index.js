@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (email && password) {
           
           //action(email,password);
-          MakeRequest(email,password,fullName);
+          useMakeRequest(email,password,fullName);
           
         } else {
             alert("Please fill in both fields.");
