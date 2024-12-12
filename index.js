@@ -97,7 +97,6 @@ async function makeRequest(url, method, data) {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
 
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -164,8 +163,7 @@ async function action(email,password){
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "http://127.0.0.1:8000/signupanonymous", true);
       xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
-      xhr.withCredentials = true;
+      xhr.withCredentials = false;
   
       // When request is complete
       xhr.onreadystatechange = function () {
@@ -213,8 +211,7 @@ function sendRequest(data) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:8000/signin", true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
-    xhr.withCredentials = true;
+    xhr.withCredentials = false;
 
     // Handle state changes
     xhr.onreadystatechange = function () {
@@ -265,7 +262,7 @@ async function getUser(table,query,value,token) {
 
   return new Promise((resolve, reject) => {
     var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
+    xhr.withCredentials = false;
 
     xhr.addEventListener("readystatechange", function() {
       if (this.readyState === 4) {
