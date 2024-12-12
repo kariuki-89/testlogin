@@ -97,7 +97,6 @@ async function makeRequest(url, method, data) {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve(xhr.responseText);
