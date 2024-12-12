@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (email && password) {
           
           //action(email,password);
-          useMakeRequest(email,password,fullName);
+          action(email,password,fullName);
           
         } else {
             alert("Please fill in both fields.");
@@ -146,9 +146,9 @@ useMakeRequest()
       
 
 
-async function action(email,password){
+async function action(email,password,fullname){
   
-  result=await useMakeRequest(email, password);
+  result=await useMakeRequest(email, password,fullname)
   jsonResult=JSON.parse(result);
   console.log(jsonResult);
   if (jsonResult.status==="200 ok"){
