@@ -297,7 +297,7 @@ async function singleUser(table,query,value,token){
     window.location.href = "https://multiagentbase-pro-93abd0.webflow.io/dashboard";
     
   } catch (error) {
-    return(error);
+    console.log(error);
   }
 }
 
