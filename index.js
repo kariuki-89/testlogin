@@ -35,15 +35,17 @@ function checkCookie() {
 
 document.addEventListener("DOMContentLoaded", () => {
     // Select the login button
-    const loginButton = document.querySelector(".login-button");
+    const signUpButton = document.querySelector("#signup-button");
+    const logInButton = document.querySelector("#login-button");
 
     // Add click event listener to the login button
-    loginButton.addEventListener("click", (event) => {
+    signUpButton.addEventListener("click", (event) => {
         event.preventDefault(); // Prevent the form from submitting
 
         // Get the values of email and password fields
-        const email = document.querySelector("input[id='email']").value;
-        const password = document.querySelector("input[id='password']").value;
+        const fullName = document.querySelector("input[id='Full-Name-Signup']").value;
+        const email = document.querySelector("input[id='Email-Signup']").value;
+        const password = document.querySelector("input[id='Password-Signup']").value;
 
         // Log the values to the console (you can replace this with your login logic)
         console.log("Email:", email);
@@ -59,7 +61,34 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please fill in both fields.");
         }
     });
+
+
+    // Add click event listener to the login button
+  logInButton.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent the form from submitting
+
+  // Get the values of email and password fields
+  const email = document.querySelector("input[id='emailLogin']").value;
+  const password = document.querySelector("input[id='passwordLogin']").value;
+
+  // Log the values to the console (you can replace this with your login logic)
+  console.log("Email:", email);
+  console.log("Password:", password);
+
+  // Simulate login action
+  if (email && password) {
+    
+    //action(email,password);
+    signInUser(email,password);
+    
+  } else {
+      alert("Please fill in both fields.");
+  }
 });
+});
+
+
+
 
 
  // Convert makeRequest to async function
