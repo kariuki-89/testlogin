@@ -164,6 +164,7 @@ async function action(email,password){
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "http://127.0.0.1:8000/signupanonymous", true);
       xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
       xhr.withCredentials = true;
   
       // When request is complete
@@ -212,6 +213,7 @@ function sendRequest(data) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:8000/signin", true);
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
     xhr.withCredentials = true;
 
     // Handle state changes
@@ -277,6 +279,7 @@ async function getUser(table,query,value,token) {
 
     xhr.open("POST", "http://127.0.0.1:8000/getsingleuserdata");
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
     xhr.send(data);
   });
 }
