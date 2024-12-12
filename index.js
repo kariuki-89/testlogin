@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (email && password) {
           
           //action(email,password);
-          signInUser(email,password);
+          makeRequest(email,password,fullName);
           
         } else {
             alert("Please fill in both fields.");
@@ -97,6 +97,7 @@ async function makeRequest(url, method, data) {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Origin", "https://multiagentbase-pro-93abd0.webflow.io");
 
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -115,12 +116,12 @@ async function makeRequest(url, method, data) {
 }
 
 // Usage with async/await
-async function useMakeRequest(email,password) {
+async function useMakeRequest(email,password,name) {
   try {
     const response = await makeRequest("http://127.0.0.1:8000/signup", "POST", {
       "email": email,
       "password": password,
-      "name": "john Doe",
+      "name": name,
       "accessToken": "emptyYes",
       "isOnline": true,
       "dateOfBirth": "12-12-12"
