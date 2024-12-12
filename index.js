@@ -297,4 +297,4 @@ async function singleUser(table,query,value,token){
   }
 }
 
-
+console.log("page is loaded")
