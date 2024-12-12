@@ -36,7 +36,7 @@ function checkCookie() {
 document.addEventListener("DOMContentLoaded", () => {
     // Select the login button
     const signUpButton = document.querySelector("#signup-button");
-    const logInButton = document.querySelector("#login-button");
+    const logInButton = document.querySelector("login-button");
 
     // Add click event listener to the login button
     signUpButton.addEventListener("click", (event) => {
