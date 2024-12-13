@@ -23,7 +23,7 @@ function getCookie(cname) {
 
 function setInputValueById(id, value) {
   const element = document.getElementById(id);
-  console.log("karis",element.id)
+  console.log("karis",value,element.value)
   
     element.value = value;
  
