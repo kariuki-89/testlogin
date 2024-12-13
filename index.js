@@ -21,6 +21,14 @@ function getCookie(cname) {
   return "";
 }
 
+function setInputValueById(id, value) {
+  const element = document.getElementById(id);
+  console.log(element.id)
+  
+    element.value = value;
+ 
+}
+
 function checkCookie() {
   let user = getCookie("theagentnaviagatemove");
   if (user != "") {
@@ -33,12 +41,34 @@ function checkCookie() {
   }
 }
 
+// Function to show an element
+function showElementById(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.style.display = "flex"; // Makes the element visible
+  }
+}
+
+// Function to hide an element
+function hideElementById(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.style.display = "none"; // Hides the element
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Select the login button
     const signUpButton = document.querySelector("#signup-button");
     const logInButton = document.querySelector("#login-button");
+    const ResetButton = document.querySelector("#Reset-button");
+    const idMain=getCookie("agentmultiagentwebide")
+    const idTokenMain=getCookie("agentmultiagentwebtky")
+    console.log(idMain,idTokenMain)
+    //console.log(signUpButton.id,logInButton.id,ResetButton.id)
 
     // Add click event listener to the login button
+    if(signUpButton!=null&&signUpButton!=undefined){
     signUpButton.addEventListener("click", (event) => {
         event.preventDefault(); // Prevent the form from submitting
 
@@ -56,20 +86,21 @@ document.addEventListener("DOMContentLoaded", () => {
           
           //action(email,password);
           action(email,password,fullName);
+          showElementById("loader")
           
         } else {
             alert("Please fill in both fields.");
         }
-    });
+    })};
 
-
+  if(logInButton!=null&&logInButton!=undefined){
     // Add click event listener to the login button
   logInButton.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the form from submitting
 
   // Get the values of email and password fields
-  const email = document.querySelector("input[id='emailLogin']").value;
-  const password = document.querySelector("input[id='passwordLogin']").value;
+  const email = document.querySelector("input[id='Email-Signup']").value;
+  const password = document.querySelector("input[id='Password-Signup']").value;
 
   // Log the values to the console (you can replace this with your login logic)
   console.log("Email:", email);
@@ -77,14 +108,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Simulate login action
   if (email && password) {
-    
+    console.log("testPage")
     //action(email,password);
     signInUser(email,password);
     
   } else {
       alert("Please fill in both fields.");
   }
-});
+})};
+
+if(ResetButton!=null&&ResetButton!=undefined){
+  // Add click event listener to the login button
+  ResetButton.addEventListener("click", (event) => {
+  event.preventDefault(); // Prevent the form from submitting
+
+// Get the values of email and password fields
+const email = document.querySelector("input[id='Email-Reset']").value;
+
+// Log the values to the console (you can replace this with your login logic)
+console.log("Email:", email);
+
+// Simulate login action
+if (email) {
+  console.log("testPage")
+  //action(email,password);
+  ResetPassword(email);
+  
+} else {
+    alert("Please fill in both fields.");
+}
+})};
 });
 
 
@@ -132,19 +185,8 @@ async function useMakeRequest(email,password,name) {
   }
 }
 
-/* Call the async function
-useMakeRequest()
-  .then((response) => {
-    // Handle the response if needed after calling useMakeRequest()
-    console.log("Final Response:", response);
-  })
-  .catch((error) => {
-    console.error("Final Error Handling:", error);
-  });
-*/
-      
 
-
+//call signup action
 async function action(email,password,fullname){
   
   result=await useMakeRequest(email, password,fullname)
@@ -152,7 +194,18 @@ async function action(email,password,fullname){
   console.log(jsonResult);
   if (jsonResult.status==="200 ok"){
     console.log("200 Ok")
+      hideElementById("loader")
       window.location.href = "https://multiagentbase-pro-93abd0.webflow.io/dashboard";
+}
+else{
+  error=jsonResult.data.message;
+  console.log(error);
+  console.log(jsonResult);
+  hideElementById("loader")
+  
+  showElementById("warningDialog")
+  setInputValueById("error-message",error)
+
 }
 }
 
@@ -295,5 +348,45 @@ async function singleUser(table,query,value,token){
     console.log(error);
   }
 }
+
+async function ResetPassword (email) {
+  const data = JSON.stringify({
+    userEmail: email
+  });
+
+  const url = "http://127.0.0.1:8000/resetpassword";
+
+  const xhrRequest = () => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.withCredentials = false;
+
+      xhr.open("POST", url);
+      xhr.setRequestHeader("Content-Type", "application/json");
+
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve(xhr.responseText);
+        } else {
+          reject(new Error(`Request failed with status ${xhr.status}: ${xhr.statusText}`));
+        }
+      };
+
+      xhr.onerror = function () {
+        reject(new Error("Network error occurred"));
+      };
+
+      xhr.send(data);
+    });
+  };
+
+  try {
+    const response = await xhrRequest();
+    console.log(response);
+  } catch (error) {
+    console.error("Error during the request:", error);
+  }
+};
+
 
 console.log("page is loaded")
